@@ -1,33 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.control.TreeView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
+<?import java.lang.*?>
 <BorderPane prefHeight="613.0" prefWidth="918.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zzg.mybatis.generator.controller.MainUIController">
     <top>
         <VBox>
@@ -77,6 +56,7 @@
                                   </columnConstraints>
                                   <rowConstraints>
                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
                                       <RowConstraints maxHeight="25.0" minHeight="8.0" prefHeight="25.0" vgrow="SOMETIMES" />
                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -89,13 +69,32 @@
                               <RowConstraints maxHeight="99.0" minHeight="11.0" prefHeight="43.0" />
                                   </rowConstraints>
                                   <children>
+                                      <Label text="是否多表操作" />
+                                      <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="0">
+                                      <children>
+                                          <RadioButton fx:id="tableSingle" text="单表操作" prefHeight="27.0" prefWidth="156.0" GridPane.columnIndex="1">
+                                              <GridPane.margin>
+                                                  <Insets left="5.0" right="5.0" />
+                                              </GridPane.margin>
+                                          </RadioButton>
+                                          <RadioButton fx:id="tableMuti" text="多表操作" prefHeight="27.0" prefWidth="156.0" GridPane.columnIndex="1">
+                                              <GridPane.margin>
+                                                  <Insets left="5.0" right="5.0" />
+                                              </GridPane.margin>
+                                          </RadioButton>
+                                      </children>
+                                      </HBox>
+                                  <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                  <children>
                                       <Label text="表名" />
                                       <TextField fx:id="tableNameField" disable="true" editable="false" prefHeight="27.0" prefWidth="156.0" promptText="person" GridPane.columnIndex="1">
                                           <GridPane.margin>
                                               <Insets left="5.0" right="5.0" />
                                           </GridPane.margin>
                                       </TextField>
-                                      <Label text="Java实体类名" GridPane.rowIndex="1" />
+                                  </children>
+                                  </HBox>
+                                  <Label text="Java实体类名" GridPane.rowIndex="1" />
                               <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                  <children>
                                             <TextField fx:id="domainObjectNameField" prefHeight="27.0" prefWidth="154.0" promptText="Person" GridPane.columnIndex="1" GridPane.rowIndex="2">

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<GridPane alignment="CENTER_LEFT" layoutX="5.0" layoutY="29.0" prefHeight="150.0" prefWidth="766.0" vgap="5.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zzg.mybatis.generator.controller.SingleTableController">
+    <columnConstraints>
+      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="400.0" minWidth="132.0" prefWidth="138.0" />
+    </columnConstraints>
+    <rowConstraints>
+      <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+
+    <children>
+      <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="1"
+            GridPane.valignment="CENTER">
+        <Label text="单表"/>
+        <TextField fx:id="tableNameField" prefHeight="27.0" prefWidth="156.0" promptText="person"
+                   GridPane.columnIndex="1">
+            <GridPane.margin>
+                <Insets left="5.0" right="5.0" top="5.0"/>
+            </GridPane.margin>
+        </TextField>
+      </HBox>
+        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="2"
+              GridPane.valignment="CENTER">
+            <children>
+              <Label text="Java实体类名" GridPane.rowIndex="1"/>
+                <TextField fx:id="domainObjectNameField" prefHeight="27.0" prefWidth="154.0" promptText="Person"
+                           GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <GridPane.margin>
+                      <Insets left="5.0" right="5.0" top="5.0"/>
+                    </GridPane.margin>
+                    <HBox.margin>
+                        <Insets right="5.0"/>
+                    </HBox.margin>
+                </TextField>
+                <Button mnemonicParsing="false" onAction="#openTableColumnCustomizationPage" text="定制列">
+                    <styleClass>
+                        <String fx:value="btn"/>
+                        <String fx:value="btn-default"/>
+                    </styleClass>
+                </Button>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="3"
+              GridPane.valignment="CENTER">
+            <children>
+              <Label text="主键(选填)" GridPane.rowIndex="2"/>
+                <TextField fx:id="tablePKFiled" prefHeight="25.0" prefWidth="216.0" promptText="primary key, such as id"
+                           GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <GridPane.margin>
+                      <Insets left="5.0" right="5.0" top="5.0"/>
+                    </GridPane.margin>
+                    <HBox.margin>
+                        <Insets right="5.0"/>
+                    </HBox.margin>
+                </TextField>
+            </children>
+        </HBox>
+    </children>
+    </GridPane>

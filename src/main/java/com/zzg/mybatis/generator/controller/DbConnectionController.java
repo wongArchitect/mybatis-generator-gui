@@ -34,6 +34,7 @@ public class DbConnectionController extends BaseFXController {
     @FXML
     protected ChoiceBox<String> dbTypeChoice;
     protected MainUIController mainUIController;
+    protected MainUIBatchController mainUIBatchController;
     protected boolean isUpdate = false;
     protected Integer primayKey;
 
@@ -60,6 +61,13 @@ public class DbConnectionController extends BaseFXController {
         this.mainUIController = controller;
         super.setDialogStage(mainUIController.getDialogStage());
     }
+
+
+    void setMainUIBatchController(MainUIBatchController controller) {
+        this.mainUIBatchController = controller;
+        super.setDialogStage(mainUIBatchController.getDialogStage());
+    }
+
 
     public DatabaseConfig extractConfigForUI() {
         String name = nameField.getText();

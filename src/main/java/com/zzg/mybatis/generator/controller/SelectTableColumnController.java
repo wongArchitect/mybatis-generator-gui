@@ -38,6 +38,10 @@ public class SelectTableColumnController extends BaseFXController {
 
     private MainUIController mainUIController;
 
+    private MainUIBatchController mainUIBatchController;
+
+    private SingleTableController singleTableController;
+
     private String tableName;
 
     @Override
@@ -100,6 +104,15 @@ public class SelectTableColumnController extends BaseFXController {
 
     public void setMainUIController(MainUIController mainUIController) {
         this.mainUIController = mainUIController;
+    }
+
+
+    public void setSingleTableController(SingleTableController singleTableController) {
+        this.singleTableController = singleTableController;
+    }
+
+    public void setMainUIBatchController(MainUIBatchController mainUIBatchController) {
+        this.mainUIBatchController = mainUIBatchController;
     }
 
     public String getTableName() {

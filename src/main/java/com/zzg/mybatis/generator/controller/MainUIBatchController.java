@@ -14,10 +14,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTreeCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -41,9 +41,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class MainUIController extends BaseFXController {
+public class MainUIBatchController extends BaseFXController {
 
-    private static final Logger _LOG = LoggerFactory.getLogger(MainUIController.class);
+    private static final Logger _LOG = LoggerFactory.getLogger(MainUIBatchController.class);
     private static final String FOLDER_NO_EXIST = "部分目录不存在，是否创建";
     // tool bar buttons
     @FXML
@@ -57,11 +57,11 @@ public class MainUIController extends BaseFXController {
     @FXML
     private TextField daoTargetPackage;
     @FXML
-    private TextField tableNameField;
+    private TextField tableNameFieldBatch;
     @FXML
-    private TextField domainObjectNameField;
+    private TextField domainObjectNameFieldBatch;
     @FXML
-    private TextField generateKeysField;	//主键ID
+    private TextField generateKeysFieldBatch;	//主键ID
     @FXML
     private TextField modelTargetProject;
     @FXML
@@ -121,8 +121,8 @@ public class MainUIController extends BaseFXController {
         dbImage.setFitWidth(40);
         connectionLabel.setGraphic(dbImage);
         connectionLabel.setOnMouseClicked(event -> {
-            TabPaneController controller = (TabPaneController) loadFXMLPage("新建数据库连接", FXMLPage.NEW_CONNECTION, false);
-            controller.setMainUIController(this);
+            TabPaneBatchController controller = (TabPaneBatchController) loadFXMLPage("新建数据库连接", FXMLPage.NEW_CONNECTION, false);
+            controller.setMainUIBatchController(this);
             controller.showDialogStage();
         });
         ImageView configImage = new ImageView("icons/config-list.png");
@@ -130,8 +130,8 @@ public class MainUIController extends BaseFXController {
         configImage.setFitWidth(40);
         configsLabel.setGraphic(configImage);
         configsLabel.setOnMouseClicked(event -> {
-            GeneratorConfigController controller = (GeneratorConfigController) loadFXMLPage("配置", FXMLPage.GENERATOR_CONFIG, false);
-            controller.setMainUIController(this);
+            GeneratorConfigBatchController controller = (GeneratorConfigBatchController) loadFXMLPage("配置", FXMLPage.GENERATOR_BATCH_CONFIG, false);
+            controller.setMainUIBatchController(this);
             controller.showDialogStage();
         });
 		useExample.setOnMouseClicked(event -> {
@@ -162,8 +162,8 @@ public class MainUIController extends BaseFXController {
 	                MenuItem item2 = new MenuItem("编辑连接");
 	                item2.setOnAction(event1 -> {
 		                DatabaseConfig selectedConfig = (DatabaseConfig) treeItem.getGraphic().getUserData();
-                        TabPaneController controller = (TabPaneController) loadFXMLPage("编辑数据库连接", FXMLPage.NEW_CONNECTION, false);
-		                controller.setMainUIController(this);
+                        TabPaneBatchController controller = (TabPaneBatchController) loadFXMLPage("编辑数据库连接", FXMLPage.NEW_CONNECTION, false);
+		                controller.setMainUIBatchController(this);
 		                controller.setConfig(selectedConfig);
 		                controller.showDialogStage();
 	                });
@@ -213,23 +213,23 @@ public class MainUIController extends BaseFXController {
                         String tableName = treeCell.getTreeItem().getValue();
                         selectedDatabaseConfig = (DatabaseConfig) treeItem.getParent().getGraphic().getUserData();
                         this.tableName = tableName;
-                        tableNameField.setText(tableName);
-                        domainObjectNameField.setText(MyStringUtils.dbStringToCamelStyle(tableName));
-                        mapperName.setText(domainObjectNameField.getText().concat("DAO"));
+                        tableNameFieldBatch.setText(tableName);
+                        domainObjectNameFieldBatch.setText(MyStringUtils.dbStringToCamelStyle(tableName));
+                        mapperName.setText(domainObjectNameFieldBatch.getText().concat("DAO"));
                     }
                 }
             });
             return cell;
         });
         loadLeftDBTree();
-//		setTooltip();
+		setTooltip();
 		//默认选中第一个，否则如果忘记选择，没有对应错误提示
         encodingChoice.getSelectionModel().selectFirst();
 	}
 
 	private void setTooltip() {
 		encodingChoice.setTooltip(new Tooltip("生成文件的编码，必选"));
-//		generateKeysField.setTooltip(new Tooltip("insert时可以返回主键ID"));
+		generateKeysFieldBatch.setTooltip(new Tooltip("insert时可以返回主键ID"));
 		offsetLimitCheckBox.setTooltip(new Tooltip("是否要生成分页查询代码"));
 		commentCheckBox.setTooltip(new Tooltip("使用数据库的列注释作为实体类字段名的Java注释 "));
 		useActualColumnNamesCheckbox.setTooltip(new Tooltip("是否使用数据库实际的列名作为实体类域的名称"));
@@ -340,7 +340,7 @@ public class MainUIController extends BaseFXController {
 		if (StringUtils.isEmpty(projectFolder))  {
 			return "项目目录不能为空";
 		}
-		if (StringUtils.isEmpty(domainObjectNameField.getText()))  {
+		if (StringUtils.isEmpty(domainObjectNameFieldBatch.getText()))  {
 			return "类名不能为空";
 		}
 		if (StringUtils.isAnyEmpty(modelTargetPackage.getText(), mapperTargetPackage.getText(), daoTargetPackage.getText())) {
@@ -379,15 +379,15 @@ public class MainUIController extends BaseFXController {
         GeneratorConfig generatorConfig = new GeneratorConfig();
         generatorConfig.setProjectFolder(projectFolderField.getText());
         generatorConfig.setModelPackage(modelTargetPackage.getText());
-        generatorConfig.setGenerateKeys(generateKeysField.getText());
+        generatorConfig.setGenerateKeys(generateKeysFieldBatch.getText());
         generatorConfig.setModelPackageTargetFolder(modelTargetProject.getText());
         generatorConfig.setDaoPackage(daoTargetPackage.getText());
         generatorConfig.setDaoTargetFolder(daoTargetProject.getText());
         generatorConfig.setMapperName(mapperName.getText());
         generatorConfig.setMappingXMLPackage(mapperTargetPackage.getText());
         generatorConfig.setMappingXMLTargetFolder(mappingTargetProject.getText());
-        generatorConfig.setTableName(tableNameField.getText());
-        generatorConfig.setDomainObjectName(domainObjectNameField.getText());
+        generatorConfig.setTableName(tableNameFieldBatch.getText());
+        generatorConfig.setDomainObjectName(domainObjectNameFieldBatch.getText());
         generatorConfig.setOffsetLimit(offsetLimitCheckBox.isSelected());
         generatorConfig.setComment(commentCheckBox.isSelected());
         generatorConfig.setOverrideXML(overrideXML.isSelected());
@@ -409,15 +409,15 @@ public class MainUIController extends BaseFXController {
     public void setGeneratorConfigIntoUI(GeneratorConfig generatorConfig) {
         projectFolderField.setText(generatorConfig.getProjectFolder());
         modelTargetPackage.setText(generatorConfig.getModelPackage());
-        generateKeysField.setText(generatorConfig.getGenerateKeys());
+        generateKeysFieldBatch.setText(generatorConfig.getGenerateKeys());
         modelTargetProject.setText(generatorConfig.getModelPackageTargetFolder());
         daoTargetPackage.setText(generatorConfig.getDaoPackage());
 		daoTargetProject.setText(generatorConfig.getDaoTargetFolder());
 		mapperName.setText(generatorConfig.getMapperName());
 		mapperTargetPackage.setText(generatorConfig.getMappingXMLPackage());
         mappingTargetProject.setText(generatorConfig.getMappingXMLTargetFolder());
-        tableNameField.setText(generatorConfig.getTableName());
-        domainObjectNameField.setText(generatorConfig.getDomainObjectName());
+        tableNameFieldBatch.setText(generatorConfig.getTableName());
+        domainObjectNameFieldBatch.setText(generatorConfig.getDomainObjectName());
         offsetLimitCheckBox.setSelected(generatorConfig.isOffsetLimit());
         commentCheckBox.setSelected(generatorConfig.isComment());
         overrideXML.setSelected(generatorConfig.isOverrideXML());
@@ -443,7 +443,7 @@ public class MainUIController extends BaseFXController {
             return;
         }
         SelectTableColumnController controller = (SelectTableColumnController) loadFXMLPage("定制列", FXMLPage.SELECT_TABLE_COLUMN, true);
-        controller.setMainUIController(this);
+        controller.setMainUIBatchController(this);
         try {
             // If select same schema and another table, update table data
             if (!tableName.equals(controller.getTableName())) {
@@ -456,14 +456,6 @@ public class MainUIController extends BaseFXController {
             _LOG.error(e.getMessage(), e);
             AlertUtil.showErrorAlert(e.getMessage());
         }
-    }
-
-    /**
-     * Shows the person overview inside the root layout.
-     */
-    public void showPersonOverview() {
-        SingleTableController controller = (SingleTableController) loadFXMLPage("单表", FXMLPage.SINGLE_TABLE_CONFIG, true);
-        controller.setMainUIController(this);
     }
 
     public void setIgnoredColumns(List<IgnoredColumn> ignoredColumns) {

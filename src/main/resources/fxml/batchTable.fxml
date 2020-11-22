@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="350.0" prefWidth="769.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zzg.mybatis.generator.controller.MainUIController">
+<Label text="多表" />
+<TextField fx:id="tableNameField" disable="true" editable="false" prefHeight="27.0" prefWidth="156.0" promptText="person" GridPane.columnIndex="1">
+<GridPane.margin>
+  <Insets left="5.0" right="5.0" />
+</GridPane.margin>
+</TextField>
+<Label text="Java实体类名" GridPane.rowIndex="1" />
+<HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+<!--<children>-->
+<!--  <TextField fx:id="domainObjectNameField" prefHeight="27.0" prefWidth="154.0" promptText="Person" GridPane.columnIndex="1" GridPane.rowIndex="2">-->
+<!--    <GridPane.margin>-->
+<!--      <Insets left="5.0" right="5.0" />-->
+<!--    </GridPane.margin>-->
+<!--    <HBox.margin>-->
+<!--      <Insets right="5.0" />-->
+<!--    </HBox.margin>-->
+<!--  </TextField>-->
+<!--</children>-->
+<GridPane.margin>
+  <Insets left="5.0" />
+</GridPane.margin>
+</HBox>
+<Label text="主键(选填)" GridPane.rowIndex="2" />
+<HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+<!--<children>-->
+<!--  <TextField fx:id="generateKeysField" prefHeight="25.0" prefWidth="216.0" promptText="primary key, such as id" GridPane.columnIndex="1" GridPane.rowIndex="3">-->
+<!--    <GridPane.margin>-->
+<!--      <Insets left="5.0" right="5.0" />-->
+<!--    </GridPane.margin>-->
+<!--    <HBox.margin>-->
+<!--      <Insets right="5.0" />-->
+<!--    </HBox.margin>-->
+<!--  </TextField>-->
+<!--</children>-->
+<GridPane.margin>
+  <Insets left="5.0" />
+</GridPane.margin>
+</HBox>
+</AnchorPane>
